@@ -4,29 +4,15 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
-public class Controller2D : MonoBehaviour
+public class Controller2D : RaycastController
 {
-    private BoxCollider2D _collider;
-    public LayerMask collisionMask;
-
     private const float MaxClimbAngle = 72f;
     private const float MaxDescendAngle = 75f;
-    private const float SkinWidth = 0.01f;
-    public int horizontalRayCount = 4;
-    public int verticalRayCount = 4;
-    private float _horizontalRaySpacing;
-    private float _verticalRaySpacing;
     
-    private RaycastOrigins _raycastOrigins;
-
     public CollisionInfo collisions;
-    void Start()
+    public override void Start()
     {
-        _collider = GetComponent<BoxCollider2D>();
-
-        CalculateRaySpacing();
-
+        base.Start();
     }
 
     public void Move(Vector3 velocity)
@@ -198,35 +184,6 @@ public class Controller2D : MonoBehaviour
             }
 
         }
-    }
-
-    void UpdateRaycastOrigins()
-    {
-        Bounds bounds = _collider.bounds;
-        bounds.Expand(SkinWidth*-2);
-        
-        _raycastOrigins.bottomLeft = new Vector2(bounds.min.x, bounds.min.y);
-        _raycastOrigins.bottomRight = new Vector2(bounds.max.x, bounds.min.y);
-        _raycastOrigins.topLeft = new Vector2(bounds.min.x, bounds.max.y);
-        _raycastOrigins.topRight = new Vector2(bounds.max.x, bounds.max.y);
-    }
-
-    void CalculateRaySpacing()
-    {
-        Bounds bounds = _collider.bounds;
-        bounds.Expand(SkinWidth*-2);
-
-        horizontalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue);
-        verticalRayCount = Mathf.Clamp(verticalRayCount, 2, int.MaxValue);
-
-        _horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
-        _verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
-    }
-    
-    struct RaycastOrigins
-    {
-        public Vector2 topLeft, topRight;
-        public Vector2 bottomLeft, bottomRight;
     }
 
     public struct CollisionInfo
