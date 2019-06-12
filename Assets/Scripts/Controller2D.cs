@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class Controller2D : RaycastController
+public class Controller2D : PlayerRaycastController
 {
     private const float MaxClimbAngle = 72f;
     private const float MaxDescendAngle = 75f;

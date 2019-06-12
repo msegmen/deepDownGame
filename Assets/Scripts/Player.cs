@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour
 {
     public float jumpHeight = 4;

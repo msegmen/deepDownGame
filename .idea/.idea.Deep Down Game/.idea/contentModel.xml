@@ -7,9 +7,13 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
+          <e p="Ball.cs" t="Include" />
+          <e p="BallController.cs" t="Include" />
+          <e p="BallRaycastController.cs" t="Include" />
+          <e p="BallSpawner.cs" t="Include" />
           <e p="Controller2D.cs" t="Include" />
           <e p="Player.cs" t="Include" />
-          <e p="RaycastController.cs" t="Include" />
+          <e p="PlayerRaycastController.cs" t="Include" />
         </e>
       </e>
       <e p="Deep Down Game.sln" t="IncludeFlat" />

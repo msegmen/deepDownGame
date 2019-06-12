@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class RaycastController : MonoBehaviour
+public class PlayerRaycastController : MonoBehaviour
 {
-    public BoxCollider2D _collider;
+    [FormerlySerializedAs("_collider")] public BoxCollider2D objCollider;
     public int horizontalRayCount = 4;
     public int verticalRayCount = 4;
     
@@ -23,7 +24,7 @@ public class RaycastController : MonoBehaviour
     // Start is called before the first frame update
     public virtual void Start()
     {
-        _collider = GetComponent<BoxCollider2D>();
+        objCollider = GetComponent<BoxCollider2D>();
 
         CalculateRaySpacing();
     }
@@ -31,7 +32,7 @@ public class RaycastController : MonoBehaviour
    
     public void UpdateRaycastOrigins()
     {
-        Bounds bounds = _collider.bounds;
+        Bounds bounds = objCollider.bounds;
         bounds.Expand(SkinWidth*-2);
         
         _raycastOrigins.bottomLeft = new Vector2(bounds.min.x, bounds.min.y);
@@ -42,7 +43,7 @@ public class RaycastController : MonoBehaviour
 
     void CalculateRaySpacing()
     {
-        Bounds bounds = _collider.bounds;
+        Bounds bounds = objCollider.bounds;
         bounds.Expand(SkinWidth*-2);
 
         horizontalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue);
